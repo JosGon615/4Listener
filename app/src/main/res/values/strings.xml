@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">4.Listener</string>
+    <string name="mas">+</string>
+    <string name="menos">-</string>
+    <string name="suma">TextView</string>
+    <string name="introduce_un_n_mero">Introduce un número</string>
+</resources>
