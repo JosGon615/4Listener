@@ -2,6 +2,7 @@ package com.example.a4listener
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.widget.addTextChangedListener
 import com.example.a4listener.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,22 +13,18 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         //sumar un numero con un boton suma y restar con un boton resta
-        var numero = 0
         binding.mas.setOnClickListener {
-            numero++
-            binding.suma.text = numero.toString()
+            binding.suma.text = (binding.suma.text.toString().toInt() + 1).toString()
         }
         binding.menos.setOnClickListener {
-            if (numero > 0) {
-                numero--
-                binding.suma.text = numero.toString()
+            if (binding.suma.text.toString().toInt() > 0) {
+                binding.suma.text = (binding.suma.text.toString().toInt() - 1).toString()
             }
         }
 
-        //cambiar el color de los botones si el editText tiene focus activo
-        binding.editTextNumber.setOnFocusChangeListener { v, hasFocus ->
+        //cambiar el color de los botones si el editTextNumber tiene focus activo
+        binding.editTextNumber.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.mas.setBackgroundColor(getColor(R.color.purple_200))
                 binding.menos.setBackgroundColor(getColor(R.color.purple_200))
@@ -37,27 +34,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.editTextNumber.addTextChangedListener {
+            binding.suma.text = it.toString()
+        }
+
     }
 
 }
-
-    /*
-    //funcion para sumar con el boton +
-    fun sumar(view: View) {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        var numero = 0
-        numero++
-        binding.suma.text = numero.toString()
-    }
-
-    //funcion para sumar con el boton -
-    fun restar(view: View) {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        var numero = 0
-        numero--
-        binding.suma.text = numero.toString()
-    }
-
-    */
